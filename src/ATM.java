@@ -34,20 +34,25 @@ public class ATM {
                 int newPin = scan.nextInt();
                 p1.setPin(newPin);
                 System.out.println(TransactionHistory.reciept("changed pin", 5));
-            } else if (input== 4) {
+            } else if (input == 4) {
                 System.out.print("Which account do you want to check? (savings or checking): ");
                 String acc = scan.nextLine();
                 if (acc.equals("savings")) {
-                    System.out.println("You have $" + savings.getBalance() + " in your savings account");
+                    System.out.println("Savings Account: $" + savings.getBalance());
                     TransactionHistory.reciept("Checked savings account balance", 4);
                 } else if (acc.equals("checking")) {
-                    System.out.println("You have $" + checking.getBalance() + " in your checking account");
+                    System.out.println("Checking Account: $" + checking.getBalance());
                     TransactionHistory.reciept("Checked checking account balance", 4);
                 }
             } else if (input == 3) {
 
-        }
+            } else if (input == 2) {
 
+            }
+            System.out.print("Do you want to do anything else? (yes or no): ");
+            loop = scan.nextLine();
+
+        }
     }
 
     public void options() {
