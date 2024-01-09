@@ -11,12 +11,12 @@ public class TransactionHistory {
         history += statement + "\n";
     }
 
-    public static String reciept(String s, int num){
+    public static String reciept(String s, int num){ // sees too much
         if (num == 1 || num == 2 || num == 3) {
-            statement = "A" + Anum + " " + s;
+            statement = "A" + Anum + " " + s + "\n";
             Anum++;
         } else {
-            statement += "S" + Snum + " " + s;
+            statement += "S" + Snum + " " + s + "\n";
             Snum++;
         }
         addStatement(statement);
