@@ -1,9 +1,11 @@
+import java.text.DecimalFormat;
 public class TransactionHistory {
 
     private static int Anum = 0000;
     private static int Snum = 0000;
     private static String history = "";
     private static String statement;
+    private static final DecimalFormat decimalFormat = new DecimalFormat("0000");
 
     public TransactionHistory() {}
 
@@ -13,10 +15,10 @@ public class TransactionHistory {
 
     public static String reciept(String s, int num){ // sees too much
         if (num == 1 || num == 2 || num == 3) {
-            statement = "A" + Anum + " " + s + "\n";
+            statement = "A" + decimalFormat.format(Anum) + " " + s;
             Anum++;
         } else {
-            statement += "S" + Snum + " " + s + "\n";
+            statement = "S" + decimalFormat.format(Snum) + " " + s;
             Snum++;
         }
         addStatement(statement);
@@ -27,4 +29,7 @@ public class TransactionHistory {
         return history;
     }
 
+
 }
+
+
