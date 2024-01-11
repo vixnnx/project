@@ -134,15 +134,16 @@ public class ATM {
 
                         if (enough == true) { // has enough to withdraw
                             if (amt > 20) {
-                                System.out.print("How many twenty dollar bills do you want?");
+                                System.out.print("How many twenty dollar bills do you want? ");
                                 twentyBills = scan.nextInt();
                                 scan.nextLine();
                                 if (amt >= twentyBills * 20) {
                                     if (twentyBills * 20 == amt) {
                                         System.out.println("Here is " + twentyBills + " twenty's");
                                     } else {
-                                        System.out.println("Here is " + twentyBills + " twenty's and " + (amt - 20 * twentyBills) / 5 + " five's"); }
-                                }
+                                        System.out.println("Here is " + twentyBills + " twenty's and " + (int) (amt - 20 * twentyBills) / 5 + " five's"); }
+                                } else {
+                                    System.out.println("that is too many twenty's\n Here is " + (maxx amt of 20s  and extra 5s) + "instead");
                             } else if (amt == 20) {
                                 System.out.print("Do you want (1) twenty for (4) fives? (please enter 1 or 4):");
                                 twentyBills = scan.nextInt();
@@ -152,7 +153,7 @@ public class ATM {
                                 } else if (twentyBills == 4) {
                                     System.out.println("Here is 4 five's");
                                 } else { // less than 20
-                                    System.out.println("Here is " + (amt - 20 * twentyBills) / 5 + " five's"); }
+                                    System.out.println("Here is " + (int) (amt - 20 * twentyBills) / 5 + " five's"); }
                             } // takes out money
 
                             if (acc.equals("savings")) { //remove from accs
