@@ -14,6 +14,7 @@ public class ATM {
     private Account checking;
     private String acc;
     private static final DecimalFormat decimalFormat = new DecimalFormat("#.00");
+    private boolean enough;
 
 
     public ATM() {   }
@@ -112,67 +113,72 @@ public class ATM {
                     amt = scan.nextDouble();
                     scan.nextLine();
                     if (amt % 5 == 0) {
-                        if (acc.equals("savings")) {
+
+                        if (acc.equals("savings")) { //acc
                             if (amt > savings.getBalance()) {
                                 System.out.println("insufficient funds!");
                                 System.out.println(TransactionHistory.reciept("$" + decimalFormat.format(amt) + " withdraw from savings account was unsuccessful", 1));
+                                enough = false;
                             } else {
-                                if (amt >= 20 && amt % 5 == 0) {
-                                    System.out.print("How many twenty dollar bills do you want?");
-                                    if (twentyBills * 20 <= amt) {
-                                        twentyBills = scan.nextInt();
-                                        scan.nextLine();
-                                        if (twentyBills * 20 == amt) {
-                                            System.out.println("Here is " + twentyBills + " twenty's");
-                                        } else {
-                                            System.out.println("Here is " + twentyBills + " twenty's and " + (amt - 20 * twentyBills) / 5 + " five's");
-                                        }
-                                    }
-                                } else if (amt % 5 == 0) { // less than 20
-                                    System.out.println("Here is " + (amt - 20 * twentyBills) / 5 + " five's");
-                                }
-                                System.out.println("Savings Account: $" + decimalFormat.format(savings.getBalance()));
-                                savings.remove(amt);
-                                System.out.println(TransactionHistory.reciept("Withdraw $" + decimalFormat.format(amt) + " from savings", 1));
+                                enough = true;
                             }
                         } else if (acc.equals("checking")) {
                             if (amt > checking.getBalance()) {
                                 System.out.println("insufficient funds!");
                                 System.out.println(TransactionHistory.reciept("$" + decimalFormat.format(amt) + " withdraw from checking account was unsuccessful", 1));
+                                enough = false;
                             } else {
-                                if (amt >= 20 && amt % 5 == 0) {
-                                    System.out.print("How many twenty dollar bills do you want?");
-                                    if (twentyBills * 20 <= amt) {
-                                        twentyBills = scan.nextInt();
-                                        scan.nextLine();
-                                        if (twentyBills * 20 == amt) {
-                                            System.out.println("Here is " + twentyBills + " twenty's");
-                                        } else {
-                                            System.out.println("Here is " + twentyBills + " twenty's and " + (amt - 20 * twentyBills) / 5 + " five's");
-                                        }
-                                    }
-                                } else if (amt % 5 == 0) { // less than 20
-                                System.out.println("Here is " + (amt - 20 * twentyBills) / 5 + " five's");
-                                }
-                                System.out.println("Checking Account: $" + decimalFormat.format(checking.getBalance()));
-                                checking.remove(amt);
-                                System.out.println(TransactionHistory.reciept("Withdraw $" + decimalFormat.format(amt) + " from checking", 1));
+                                enough = true;
                             }
                         }
-                    } else {
+
+                        if (enough == true) { // has enough to withdraw
+                            if (amt > 20) {
+                                System.out.print("How many twenty dollar bills do you want?");
+                                twentyBills = scan.nextInt();
+                                scan.nextLine();
+                                if (amt >= twentyBills * 20) {
+                                    if (twentyBills * 20 == amt) {
+                                        System.out.println("Here is " + twentyBills + " twenty's");
+                                    } else {
+                                        System.out.println("Here is " + twentyBills + " twenty's and " + (amt - 20 * twentyBills) / 5 + " five's"); }
+                                }
+                            } else if (amt == 20) {
+                                System.out.print("Do you want (1) twenty for (4) fives? (please enter 1 or 4):");
+                                twentyBills = scan.nextInt();
+                                scan.nextLine();
+                                if (twentyBills == 1) {
+                                    System.out.println("Here is 1 twenty");
+                                } else if (twentyBills == 4) {
+                                    System.out.println("Here is 4 five's");
+                                } else { // less than 20
+                                    System.out.println("Here is " + (amt - 20 * twentyBills) / 5 + " five's"); }
+                            } // takes out money
+
+                            if (acc.equals("savings")) { //remove from accs
+                                savings.remove(amt);
+                                System.out.println("Savings Account: $" + decimalFormat.format(savings.getBalance()));
+                                System.out.println(TransactionHistory.reciept("Withdraw $" + decimalFormat.format(amt) + " from savings", 1));
+                            } else if (acc.equals("checking")) {
+                                checking.remove(amt);
+                                System.out.println("Checking Account: $" + decimalFormat.format(checking.getBalance()));
+                                System.out.println(TransactionHistory.reciept("Withdraw $" + decimalFormat.format(amt) + " from checking", 1));
+                            } //remove from acc
+                        }
+                    } else { // if not a mutiple of 5
                         System.out.println("invalid amount!");
                         System.out.println(TransactionHistory.reciept("Money withdraw was not successful", 1));
                     }
                 } else {
-                    System.out.println("That is not a valid account");
+                    System.out.println("That is not a valid account"); //acc
                 }
             }
-                if (input != 7) {
-                    System.out.println();
-                    System.out.print("Do you want to do anything else? (yes or no): ");
-                    loop = scan.nextLine();
-                }
-        }
+            if (input != 7) {
+                System.out.println();
+                System.out.print("Do you want to do anything else? (yes or no): ");
+                loop = scan.nextLine();
+            }
+        } // end of loop
         System.out.println("Thank you for using this ATM!");
     }
 
