@@ -6,6 +6,9 @@ public class Account {
         this.name = name;
         balance = 0;
     }
+    public double getBalance() {
+        return balance;
+    }
 
     public void add(double amt) {
         balance += amt;
@@ -15,8 +18,4 @@ public class Account {
         balance -= amt;
     }
 
-
-    public double getBalance() {
-        return balance;
-    }
 }

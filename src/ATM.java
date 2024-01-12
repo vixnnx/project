@@ -20,7 +20,7 @@ public class ATM {
     public ATM() {   }
 
     public void start() { // sometimes prints history
-        System.out.println("Welcome to the ATM");
+        System.out.println("Welcome to the ATM \uD83C\uDFE7");
         System.out.print("Please enter your name: ");
         String name = scan.nextLine();
         System.out.print("Please create a pin: ");
@@ -29,9 +29,9 @@ public class ATM {
         p1 = new Customer(name, pin);
         savings = new Account("savings account", p1);
         checking = new Account("checking account", p1);
+        ConsoleUtility.clearScreen();
 
         while (loop.equals("yes") && input != 7) {
-            ConsoleUtility.clearScreen();
             access();
             options();
             System.out.print("What do you want to do? ");
@@ -39,12 +39,14 @@ public class ATM {
             scan.nextLine();
             if (input == 5) {
                 System.out.println(TransactionHistory.getHistory());
+
             } else if (input == 6) { // prints history after?
-                System.out.print("Enter a new pin:");
+                System.out.print("Enter a new pin: ");
                 int newPin = scan.nextInt();
                 scan.nextLine();
                 p1.setPin(newPin);
                 System.out.println(TransactionHistory.reciept("changed pin", 5));
+
             } else if (input == 4) {
                 System.out.print("Which account do you want to check? (savings or checking): ");
                 acc = scan.nextLine();
@@ -141,30 +143,34 @@ public class ATM {
                                     if (twentyBills * 20 == amt) {
                                         System.out.println("Here is " + twentyBills + " twenty's");
                                     } else {
-                                        System.out.println("Here is " + twentyBills + " twenty's and " + (int) (amt - 20 * twentyBills) / 5 + " five's"); }
-                                } else {
-                                    System.out.println("that is too many twenty's\n Here is " + (maxx amt of 20s  and extra 5s) + "instead");
-                            } else if (amt == 20) {
-                                System.out.print("Do you want (1) twenty for (4) fives? (please enter 1 or 4):");
-                                twentyBills = scan.nextInt();
-                                scan.nextLine();
-                                if (twentyBills == 1) {
-                                    System.out.println("Here is 1 twenty");
-                                } else if (twentyBills == 4) {
-                                    System.out.println("Here is 4 five's");
-                                } else { // less than 20
-                                    System.out.println("Here is " + (int) (amt - 20 * twentyBills) / 5 + " five's"); }
-                            } // takes out money
-
-                            if (acc.equals("savings")) { //remove from accs
-                                savings.remove(amt);
-                                System.out.println("Savings Account: $" + decimalFormat.format(savings.getBalance()));
-                                System.out.println(TransactionHistory.reciept("Withdraw $" + decimalFormat.format(amt) + " from savings", 1));
-                            } else if (acc.equals("checking")) {
-                                checking.remove(amt);
-                                System.out.println("Checking Account: $" + decimalFormat.format(checking.getBalance()));
-                                System.out.println(TransactionHistory.reciept("Withdraw $" + decimalFormat.format(amt) + " from checking", 1));
-                            } //remove from acc
+                                        System.out.println("Here is " + twentyBills + " twenty's and " + (int) (amt - 20 * twentyBills) / 5 + " five's");
+                                    }
+                                } else if (amt < twentyBills * 20) {
+                                    System.out.println("That is too many twenty's");
+                                    twentyBills = (int) (amt / 20);
+                                    System.out.println("Here is " + twentyBills + " twenty's and " + (int) (amt % 20) / 5 + "five's instead");
+                                } else if (amt == 20) {
+                                    System.out.print("Do you want (1) twenty for (4) fives? (please enter 1 or 4):");
+                                    twentyBills = scan.nextInt();
+                                    scan.nextLine();
+                                    if (twentyBills == 1) {
+                                        System.out.println("Here is 1 twenty");
+                                    } else if (twentyBills == 4) {
+                                        System.out.println("Here is 4 five's");
+                                    } else { // less than 20
+                                        System.out.println("Here is " + (int) (amt - 20 * twentyBills) / 5 + " five's");
+                                    }
+                                } // takes out money
+                                if (acc.equals("savings")) { //remove from accs
+                                    savings.remove(amt);
+                                    System.out.println("Savings Account: $" + decimalFormat.format(savings.getBalance()));
+                                    System.out.println(TransactionHistory.reciept("Withdraw $" + decimalFormat.format(amt) + " from savings", 1));
+                                } else if (acc.equals("checking")) {
+                                    checking.remove(amt);
+                                    System.out.println("Checking Account: $" + decimalFormat.format(checking.getBalance()));
+                                    System.out.println(TransactionHistory.reciept("Withdraw $" + decimalFormat.format(amt) + " from checking", 1));
+                                } //remove from acc
+                            }
                         }
                     } else { // if not a mutiple of 5
                         System.out.println("invalid amount!");
@@ -174,26 +180,33 @@ public class ATM {
                     System.out.println("That is not a valid account"); //acc
                 }
             }
-            if (input != 7) {
-                System.out.println();
-                System.out.print("Do you want to do anything else? (yes or no): ");
-                loop = scan.nextLine();
+                if (input != 7) {
+                    System.out.println();
+                    System.out.print("Do you want to do anything else? (yes or no): ");
+                    loop = scan.nextLine();
+                }
+            try {
+                Thread.sleep(550);
+            } catch (Exception e) {
+                System.out.println("error");
             }
+            ConsoleUtility.clearScreen();
         } // end of loop
-        System.out.println("Thank you for using this ATM!");
+            System.out.println("Thank you for using this ATM!");
+
+        }
+
+    private void options() {
+        System.out.println("1. Withdraw money \uD83D\uDCB5\n" +
+                "2. Deposit money \uD83D\uDCB3\n" +
+                "3. Transfer money between accounts \uD83D\uDCB1\n" +
+                "4. Get account balances \uD83D\uDCB2\n" +
+                "5. Get transaction history \uD83E\uDDFE\n" +
+                "6. Change PIN \uD83D\uDDC3\uFE0F\n" +
+                "7. Exit \uD83C\uDFE6\n");
     }
 
-    public void options() {
-        System.out.println("1. Withdraw money\n" +
-                "2. Deposit money\n" +
-                "3. Transfer money between accounts\n" +
-                "4. Get account balances\n" +
-                "5. Get transaction history\n" +
-                "6. Change PIN\n" +
-                "7. Exit\n");
-    }
-
-    public void access() {
+    private void access() {
         System.out.print("Please enter your pin: ");
         int attempt = scan.nextInt();
         scan.nextLine();

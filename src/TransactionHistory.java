@@ -9,8 +9,9 @@ public class TransactionHistory {
 
     public TransactionHistory() {}
 
-    private static void addStatement(String statement) {
-        history += statement + "\n";
+
+    public static String getHistory() {
+        return history;
     }
 
     public static String reciept(String s, int num){ // sees too much
@@ -25,11 +26,10 @@ public class TransactionHistory {
         return statement;
     }
 
-    public static String getHistory() {
-        return history;
+
+    private static void addStatement(String statement) {
+        history += statement + "\n";
     }
-
-
 }
 
 
