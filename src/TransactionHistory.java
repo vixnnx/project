@@ -12,9 +12,9 @@ public class TransactionHistory {
 
     public static String getHistory() {
         return history;
-    }
+    } //returns history to be printed
 
-    public static String reciept(String s, int num){ // sees too much
+    public static String reciept(String s, int num){ // creates a reciept for each transaction
         if (num == 1 || num == 2 || num == 3) {
             statement = "A" + decimalFormat.format(Anum) + " " + s;
             Anum++;
@@ -22,14 +22,14 @@ public class TransactionHistory {
             statement = "S" + decimalFormat.format(Snum) + " " + s;
             Snum++;
         }
-        addStatement(statement);
+        addStatement(statement); // adds transaction to history
         return statement;
     }
 
 
     private static void addStatement(String statement) {
         history += statement + "\n";
-    }
+    } // adds transaction to history
 }
 
 

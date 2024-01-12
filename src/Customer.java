@@ -9,9 +9,9 @@ public class Customer {
 
     public int getPin(){
         return pin;
-    }
+    } // returns pin
 
     public void setPin(int pin){
         this.pin = pin;
-    }
+    } // changes pin
 }
