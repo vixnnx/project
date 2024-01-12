@@ -48,7 +48,7 @@ public class ATM {
                 p1.setPin(newPin);
                 System.out.println(TransactionHistory.reciept("changed pin", 5));
 
-            } else if (input == 4) {
+            } else if (input == 4) { // checks acc balance
                 System.out.print("Which account do you want to check? (savings or checking): ");
                 acc = scan.nextLine();
                 if (acc.equals("savings")) { // prints savings acc info
@@ -107,7 +107,7 @@ public class ATM {
                         System.out.println(TransactionHistory.reciept("Deposited $" + decimalFormat.format(amt) + " into checking account", 2));
                         System.out.println("Checking Account: $" + decimalFormat.format(checking.getBalance()));
                     }
-                } else { // prints if teh acc name isnt valid
+                } else { // prints if the acc name isnt valid
                     System.out.println("That is not a valid account");
                 }
 
@@ -135,16 +135,15 @@ public class ATM {
                             } else {
                                 enough = true;
                             }
-
                         }
                         if (enough == true) { // has enough to withdraw
                             if (amt > 20) {
-                                System.out.print("How many twenty dollar bills do you want? ");
+                                System.out.print("How many twenty dollar bills do you want? "); // tells them how many of each bill they have withdrew
                                 twentyBills = scan.nextInt();
                                 scan.nextLine();
                                 if (amt >= twentyBills * 20) {
                                     if (twentyBills * 20 == amt) {
-                                        System.out.println("Here is " + twentyBills + " twenty's");
+                                        System.out.println("Here is " + twentyBills + " twenty's"); // doesnt get 5's
                                     } else {
                                         System.out.println("Here is " + twentyBills + " twenty's and " + (int) (amt - 20 * twentyBills) / 5 + " five's");
                                     }
@@ -157,14 +156,13 @@ public class ATM {
                                     twentyBills = scan.nextInt();
                                     scan.nextLine();
                                     if (twentyBills == 1) {
-                                        System.out.println("Here is 1 twenty");
+                                        System.out.println("Here is 1 twenty"); // only wants a 20
                                     } else if (twentyBills == 4) {
-                                        System.out.println("Here is 4 five's");
+                                        System.out.println("Here is 4 five's"); // wants 4 fives
                                     } else { // less than 20
                                         System.out.println("Here is " + (int) (amt - 20 * twentyBills) / 5 + " five's");
                                     }
                                 }
-
                                 if (acc.equals("savings")) { //remove $ from accs
                                     savings.remove(amt);
                                     System.out.println("Savings Account: $" + decimalFormat.format(savings.getBalance()));
