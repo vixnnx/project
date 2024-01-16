@@ -151,7 +151,8 @@ public class ATM {
                                     System.out.println("That is too many twenty's");
                                     twentyBills = (int) (amt / 20);
                                     System.out.println("Here is " + twentyBills + " twenty's and " + (int) (amt % 20) / 5 + "five's instead");
-                                } else if (amt == 20) { // if they have exactly 20
+                                }
+                            } else if (amt == 20) { // if they have exactly 20
                                     System.out.print("Do you want (1) twenty for (4) fives? (please enter 1 or 4):");
                                     twentyBills = scan.nextInt();
                                     scan.nextLine();
@@ -181,7 +182,6 @@ public class ATM {
                 } else {
                     System.out.println("That is not a valid account"); //acc
                 }
-            }
                 if (input != 7) { // sees if user wants to do anything else
                     System.out.println();
                     System.out.print("Do you want to do anything else? (yes or no): ");
